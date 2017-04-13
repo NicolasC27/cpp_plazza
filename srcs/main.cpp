@@ -5,10 +5,12 @@
 // Login   <lucas.deboute@epitech.eu>
 // 
 // Started on  Thu Apr 13 10:25:15 2017 Lucas Debouté
-// Last update Thu Apr 13 10:25:39 2017 Lucas Debouté
+// Last update Thu Apr 13 19:07:33 2017 Valentin Gérard
 //
 
-int	main(int argc, char **argv)
+#include <cstdlib>
+
+int	main(int argc, char *argv[])
 {
-  return 0;
+  return (EXIT_SUCCESS);
 }
