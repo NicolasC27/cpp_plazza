@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+Supprimerait .gitignore
+Supprimerait .idea/
+Supprimerait CMakeLists.txt
+Supprimerait cmake-build-debug/
