@@ -1,11 +1,11 @@
 //
-// main.cpp for plazza in /home/codeine/Projects/B4/CPP/cpp_plazza/srcs
+// main.cpp for cpp_plazza in /home/ikirame/Documents/Projects/cpp_plazza
 // 
-// Made by Lucas Debouté
-// Login   <lucas.deboute@epitech.eu>
+// Made by Valentin Gérard
+// Login   <valentin.gerard@epitech.eu>
 // 
-// Started on  Thu Apr 13 10:25:15 2017 Lucas Debouté
-// Last update Thu Apr 13 19:07:33 2017 Valentin Gérard
+// Started on  Thu Apr 13 17:32:37 2017 Valentin Gérard
+// Last update Thu Apr 13 17:32:37 2017 Valentin Gérard
 //
 
 #include <cstdlib>

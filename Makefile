@@ -1,11 +1,11 @@
 ##
-## Makefile for plazza in /home/codeine/Projects/B4/CPP/cpp_plazza
+## Makefile for cpp_plazza in /home/ikirame/Documents/Projects/cpp_plazza
 ## 
-## Made by Lucas Debouté
-## Login   <lucas.deboute@epitech.eu>
+## Made by Valentin Gérard
+## Login   <valentin.gerard@epitech.eu>
 ## 
-## Started on  Thu Apr 13 10:15:21 2017 Lucas Debouté
-## Last update Thu Apr 13 19:03:50 2017 Valentin Gérard
+## Started on  Thu Apr 13 17:32:21 2017 Valentin Gérard
+## Last update Thu Apr 13 17:32:22 2017 Valentin Gérard
 ##
 
 DEBUG		= no
