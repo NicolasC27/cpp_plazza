@@ -5,7 +5,7 @@
 // Login   <lucas.deboute@epitech.eu>
 // 
 // Started on  Thu Apr 13 19:34:42 2017 Lucas Debouté
-// Last update Fri Apr 14 12:54:16 2017 Lucas Debouté
+// Last update Sat Apr 15 11:53:08 2017 Lucas Debouté
 //
 
 #ifndef REGEX_HPP_
@@ -22,6 +22,7 @@ public:
   regex(){}
   ~regex(){}
   std::vector<std::string> ip_tracker(const std::string &toFind);
+  std::vector<std::string> email_tracker(const std::string &toFind);
 };
 
 #endif /* REGEX_HPP_ */
