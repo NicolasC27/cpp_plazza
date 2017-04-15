@@ -1,0 +1,25 @@
+//
+// regex.cpp for plazza in /home/codeine/Projects/B4/CPP/cpp_plazza/includes
+// 
+// Made by Lucas Debouté
+// Login   <lucas.deboute@epitech.eu>
+// 
+// Started on  Thu Apr 13 19:34:42 2017 Lucas Debouté
+// Last update Thu Apr 13 19:56:34 2017 Lucas Debouté
+//
+
+#ifndef REGEX_HPP_
+# define REGEX_HPP_
+
+#include <vectors>
+
+class regex
+{
+private:
+  std::vector<std::string> found;
+public:
+  regex(){}
+  ~regex(){}
+}:
+
+#endif /* REGEX_HPP_ */
