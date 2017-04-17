@@ -1,11 +1,11 @@
 ##
-## Makefile for Arcade in /home/ikirame/Documents/Projects/cpp_arcade/lib/Ncurses
-##
-## Made by Valentin Gérard
-## Login   <valentin.gerard@epitech.eu>
-##
-## Started on  Wed Mar 29 20:50:56 2017 Valentin Gérard
-## Last update Sat Apr  8 21:13:25 2017 Nicolas Nicolas
+## Makefile for Makefile in /home/nicolas/rendu/cpp_plazza
+## 
+## Made by Nicolas
+## Login   <nicolas1.chevalier@epitech.eu>
+## 
+## Started on  Mon Apr 17 20:48:57 2017 Nicolas
+## Last update Mon Apr 17 20:48:57 2017 Nicolas
 ##
 
 DEBUG		= no
