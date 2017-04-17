@@ -29,6 +29,5 @@ int main(int argc, char **argv)
 	  return (1);
 	}
   plazza::PlazzaCore(std::atol(argv[1]));
-
 }
 

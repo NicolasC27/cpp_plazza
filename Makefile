@@ -30,6 +30,7 @@ CXXFLAGS	+= -std=c++11
 
 SRCS		= $(SRCSDIR)/main.cpp \
 		  $(SRCSDIR)/PlazzaCore.cpp \
+		  $(SRCSDIR)/Data.cpp
 
 OBJS		= $(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/%.o,$(SRCS))
 
