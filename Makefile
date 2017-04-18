@@ -5,11 +5,12 @@
 ## Login   <valentin.gerard@epitech.eu>
 ## 
 ## Started on  Thu Apr 13 17:32:21 2017 Valentin Gérard
-## Last update Thu Apr 13 17:32:22 2017 Valentin Gérard
+## Last update Wed Apr 19 01:39:08 2017 Valentin Gérard
 ##
 
 DEBUG		= no
 
+INCDIR		= includes
 SRCSDIR		= srcs
 OBJSDIR		= objs
 
@@ -23,18 +24,24 @@ RM		= rm -f
 
 NAME		= plazza
 
-CXXFLAGS	= -I./includes
-CXXFLAGS	+= -W -Wall -Wextra
+CXXFLAGS	= -I./$(INCDIR)
+CXXFLAGS	+= -W -Wall -Wextra -Wshadow
 CXXFLAGS	+= -std=c++11
 
-SRCS		= $(SRCSDIR)/main.cpp
+SRCS		= $(SRCSDIR)/main.cpp \
+		  $(SRCSDIR)/Exception.cpp \
+		  $(SRCSDIR)/NamedPipe.cpp \
+		  $(SRCSDIR)/Fork.cpp \
+		  $(SRCSDIR)/Task.cpp \
+		  $(SRCSDIR)/ThreadPool.cpp \
+		  $(SRCSDIR)/PlazzaCore.cpp \
 
 OBJS		= $(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/%.o,$(SRCS))
 
 $(NAME):	build-objsdir $(OBJS)
 		$(CXX) $(OBJS) $(LDFLAGS) -o $(NAME)
 
-$(OBJSDIR)/%.o:	$(SRCSDIR)/%.cpp
+$(OBJSDIR)/%.o: $(SRCSDIR)/%.cpp
 		$(CXX) $(CXXFLAGS) -c $< -o $@
 
 build-objsdir:
@@ -56,6 +63,6 @@ define make-objsdir
 	mkdir -p $(OBJSDIR)
 	for dir in $(SRCDIRS); \
 	do \
-		mkdir -p $(OBJSDIR)/$$dir; \
+	  mkdir -p $(OBJSDIR)/$$dir; \
 	done
 endef
