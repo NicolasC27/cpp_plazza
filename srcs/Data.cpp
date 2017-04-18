@@ -10,16 +10,21 @@
 
 #include <Data.hpp>
 
-Data::Data(std::string data)
+Data::Data(std::string data, std::list<std::string> information) : _name(data)
 {
-  parseData(data);
+  std::list<std::string>::const_iterator list = information.begin();
+
+  while (list != information.end())
+	{
+	  addData((*list));
+	  list++;
+	}
 }
 
 Data::~Data()
 {
   _information.erase(_information.begin(), _information.end());
 }
-
 
 std::vector<std::string> const &Data::getData() const
 {
@@ -28,32 +33,14 @@ std::vector<std::string> const &Data::getData() const
 
 void Data::addData(const std::string &string)
 {
-  _information.push_back(string);
+  if (!string.empty())
+	_information.push_back(string);
 }
 
-void Data::parseData(std::string data)
+void Data::setName(std::string name)
 {
-  size_t pos = 0;
-  std::string save;
-  size_t first = 0;
-
-
-  while ((pos = data.find(' ')) != std::string::npos || (pos = data.find('\t')) != std::string::npos || !data.empty())
-	{
-	  if (pos == std::string::npos)
-		pos = data.size();
-	  save = data.substr(0, pos);
-	  if (first == 0)
-		{
-		  first = 1;
-		  _name = save;
-		} else
-		{
-		  _information.push_back(save);
-		}
-	  data.erase(0, pos + 1);
-
-	}
+  if (!name.empty())
+	_name = name;
 }
 
 

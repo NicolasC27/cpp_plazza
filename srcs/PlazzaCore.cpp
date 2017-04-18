@@ -9,6 +9,7 @@
 */
 
 #include <iostream>
+#include <numeric>
 #include "PlazzaCore.hpp"
 
 
@@ -35,9 +36,30 @@ void plazza::PlazzaCore::run()
 
 void plazza::PlazzaCore::createNewData(std::string data)
 {
-  Data *newData = new Data(data);
+  Data *newData;
+  std::string save;
+  std::list<std::string> list;
+  std::list<std::string> information;
+  size_t pos;
+  pos = 0;
 
-  _files.push_back(newData);
+  while ((pos = data.find(' ')) != std::string::npos || (pos = data.find('\t')) != std::string::npos || !data.empty())
+	{
+	  if (pos == std::string::npos)
+		pos = data.size();
+	  save = data.substr(0, pos);
+	  if (save == std::string("PHONE_NUMBER") || save == std::string("EMAIL_ADDRESS") ||
+		  save == std::string("IP_ADDRESS"))
+		information.push_front(save);
+	  else
+		list.push_front(save);
+	  data.erase(0, pos + 1);
+	}
+  for (std::list<std::string>::iterator lists = list.begin(); lists != list.end(); ++lists)
+	{
+	  newData = new Data((*lists), information);
+	  _files.push_back(newData);
+	}
 }
 
 void plazza::PlazzaCore::ManageCommand(std::string basic_string)

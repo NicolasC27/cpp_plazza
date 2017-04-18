@@ -17,18 +17,22 @@
 
 class Data
 {
-	std::string _name;
-	std::vector<std::string> _information;
-
 	public:
-	Data(std::string data);
+	Data(std::string data, std::list<std::string> information);
+
 	virtual ~Data();
 
 	void addData(std::string const &);
-	void parseData(std::string data);
-
 
 	std::vector<std::string> const &getData() const;
+
+	void setName(std::string name);
+
+	private:
+	std::string _name;
+	std::vector<std::string> _information;
+
+
 };
 
 #endif //CPP_PLAZZA_DATA_HPP
