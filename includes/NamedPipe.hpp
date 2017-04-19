@@ -11,12 +11,10 @@
 #ifndef NAMEDPIPE_HPP_
 # define NAMEDPIPE_HPP_
 
-# include <string>
-# include <fstream>
-# include <iostream>
 # include <sys/stat.h>
 # include <unistd.h>
 
+# include "IOfd.hpp"
 # include "Exception.hpp"
 
 namespace Plazza
@@ -25,21 +23,18 @@ namespace Plazza
   class NamedPipe
   {
    private:
-    std::string	_fileName;
+    std::string		_fileName;
+    Common::IOfd	*_fileIO;
 
    public:
     NamedPipe(const std::string &fileName);
-    // dangerous copy (unlink destructor)
-    // Changer le copy en move ou supprimer la copy
-    /*NamedPipe(const NamedPipe &other);
-    NamedPipe &operator=(const NamedPipe &other);*/
+    NamedPipe(const NamedPipe &other) = delete;
+    NamedPipe &operator=(const NamedPipe &other) = delete;
     ~NamedPipe();
 
     const std::string &getFileName() const;
     void setFileName(const std::string &fileName);
 
-    // change ifstream/ofstream by read()/write()
-    // do fd class (iofd)
     void writer(const std::string &data);
     std::string	reader();
   };

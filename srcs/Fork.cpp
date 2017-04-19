@@ -16,22 +16,6 @@ Plazza::Fork::Fork() : _pid(fork()), _joined(false)
     throw ForkException(strerror(errno));
 }
 
-/*Plazza::Fork::Fork(const Fork &other)
-{
-  this->_pid = other._pid;
-  this->_joined = other._joined;
-}
-
-Plazza::Fork &Plazza::Fork::operator=(const Fork &other)
-{
-  if (&other != this)
-    {
-      this->_pid = other._pid;
-      this->_joined = other._joined;
-    }
-  return (*this);
-}*/
-
 Plazza::Fork::~Fork()
 {
   if (this->isParent() && !this->_joined)

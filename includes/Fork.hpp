@@ -12,7 +12,6 @@
 # define FORK_HPP_
 
 # include <unistd.h>
-# include <sys/types.h>
 # include <sys/wait.h>
 
 # include "Exception.hpp"
@@ -28,9 +27,8 @@ namespace Plazza
 
    public:
     Fork();
-    // Supprime ou modifier les copies en move
-    /*Fork(const Fork &other);
-    Fork &operator=(const Fork &other);*/
+    Fork(const Fork &other) = delete;
+    Fork &operator=(const Fork &other) = delete;
     ~Fork();
 
     pid_t getPid() const;

@@ -8,26 +8,15 @@
 // Last update Sun Apr 16 14:11:03 2017 Valentin Gérard
 //
 
+#include <fcntl.h>
 #include "NamedPipe.hpp"
-#include <iostream>
 
 Plazza::NamedPipe::NamedPipe(const std::string &fileName) : _fileName(fileName + ".fifo")
 {
   if (mkfifo(this->_fileName.c_str(), S_IRWXU | S_IRGRP | S_IWGRP) == -1)
     throw NamedPipeException(strerror(errno));
+  this->_fileIO = new Common::IOfd(this->_fileName, O_RDWR);
 }
-
-/*Plazza::NamedPipe::NamedPipe(const NamedPipe &other)
-{
-  this->_fileName = other._fileName;
-}
-
-Plazza::NamedPipe &Plazza::NamedPipe::operator=(const NamedPipe &other)
-{
-  if (&other != this)
-    this->_fileName = other._fileName;
-  return *this;
-}*/
 
 Plazza::NamedPipe::~NamedPipe()
 {
@@ -41,26 +30,10 @@ const std::string	&Plazza::NamedPipe::getFileName() const
 
 void		Plazza::NamedPipe::writer(const std::string &data)
 {
-  std::ofstream	fileWriter(this->_fileName.c_str(), std::ofstream::out);
-
-  if (fileWriter.is_open())
-    fileWriter << data;
-  else
-    throw NamedPipeException(strerror(errno));
+  this->_fileIO->write(data);
 }
 
 std::string	Plazza::NamedPipe::reader()
 {
-  std::ifstream	fileReader(this->_fileName.c_str(), std::ifstream::in);
-  std::string	data;
-  std::string	line;
-
-  if (fileReader.is_open())
-    {
-      while (std::getline(fileReader, line))
-	data += line;
-    }
-  else
-    throw NamedPipeException(strerror(errno));
-  return (data);
+  return (this->_fileIO->read());
 }

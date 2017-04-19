@@ -16,7 +16,7 @@
 # include <cerrno>
 # include <cstring>
 
-namespace Plazza
+namespace Common
 {
 
   class PlazzaException : public std::exception
@@ -30,6 +30,20 @@ namespace Plazza
 
     virtual const char *what() const throw();
   };
+
+  class IOfdException : public PlazzaException
+  {
+   public:
+    IOfdException(const std::string &message) throw();
+    virtual ~IOfdException() throw();
+  };
+
+}
+
+namespace Plazza
+{
+
+  typedef Common::PlazzaException PlazzaException;
 
   class ForkException : public PlazzaException
   {

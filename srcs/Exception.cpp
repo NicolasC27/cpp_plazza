@@ -10,15 +10,21 @@
 
 #include "Exception.hpp"
 
-Plazza::PlazzaException::PlazzaException(const std::string &message) throw() : _message(message)
+Common::PlazzaException::PlazzaException(const std::string &message) throw() : _message(message)
 {}
 
-const char *Plazza::PlazzaException::what() const throw()
+Common::PlazzaException::~PlazzaException() throw()
+{}
+
+const char *Common::PlazzaException::what() const throw()
 {
   return this->_message.c_str();
 }
 
-Plazza::PlazzaException::~PlazzaException() throw()
+Common::IOfdException::IOfdException(const std::string &message) throw() : PlazzaException(message)
+{}
+
+Common::IOfdException::~IOfdException() throw()
 {}
 
 Plazza::ForkException::ForkException(const std::string &message) throw() : PlazzaException(message)

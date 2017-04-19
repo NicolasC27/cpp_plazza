@@ -12,8 +12,6 @@
 # define PLAZZACORE_HPP_
 
 # include <iostream>
-# include <cstdlib>
-# include <vector>
 
 //# include "Data.hpp"
 

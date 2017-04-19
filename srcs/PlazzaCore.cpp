@@ -8,7 +8,7 @@
 // Last update Mon Apr 17 13:38:07 2017 Valentin Gérard
 //
 
-#include "../includes/PlazzaCore.hpp"
+#include "PlazzaCore.hpp"
 
 Plazza::PlazzaCore::PlazzaCore(int nbThreads) : _nbThreads(nbThreads)
 {}
