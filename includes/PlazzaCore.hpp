@@ -13,7 +13,6 @@
 
 # include <iostream>
 
-//# include "Data.hpp"
 
 namespace Plazza
 {
@@ -22,7 +21,6 @@ namespace Plazza
   {
    private:
     int _nbThreads;
-    //std::vector <Data *> _files;
 
    public:
     PlazzaCore(int nbThreads);
@@ -31,8 +29,6 @@ namespace Plazza
     ~PlazzaCore();
 
     void run();
-    /*void ManageCommand(std::string basic_string);
-      void createNewData(std::string data);*/
   };
 
 }

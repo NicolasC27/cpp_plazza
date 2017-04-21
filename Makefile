@@ -37,7 +37,8 @@ SRCS		= $(SRCSDIR)/main.cpp \
 		  $(SRCSDIR)/ThreadPool.cpp \
 		  $(SRCSDIR)/Fork.cpp \
 		  $(SRCSDIR)/Data.cpp \
-		  $(SRCSDIR)/PlazzaCore.cpp
+		  $(SRCSDIR)/PlazzaCore.cpp \
+		  $(SRCSDIR)/Parser.cpp \
 
 OBJS		= $(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/%.o,$(SRCS))
 

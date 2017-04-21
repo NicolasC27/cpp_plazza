@@ -15,24 +15,27 @@
 #include <iostream>
 #include <list>
 
-class Data
+namespace parser
 {
-	public:
-	Data(std::string data, std::list<std::string> information);
+	class Data
+	{
+		public:
+		Data(std::string data, std::list<std::string> information);
 
-	virtual ~Data();
+		virtual ~Data();
 
-	void addData(std::string const &);
+		void addData(std::string const &);
 
-	std::vector<std::string> const &getData() const;
+		std::vector<std::string> const &getData() const;
 
-	void setName(std::string name);
+		void setName(std::string name);
 
-	private:
-	std::string _name;
-	std::vector<std::string> _information;
+		const std::string &getName() const;
 
-
-};
+		private:
+		std::string _name;
+		std::vector<std::string> _information;
+	};
+}
 
 #endif //CPP_PLAZZA_DATA_HPP
