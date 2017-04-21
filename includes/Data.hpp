@@ -32,8 +32,11 @@ namespace parser
 
 		const std::string &getName() const;
 
+		const std::vector<std::string> &getInformation() const;
+
 		private:
 		std::string _name;
+
 		std::vector<std::string> _information;
 	};
 }

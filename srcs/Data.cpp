@@ -48,4 +48,9 @@ const std::string &parser::Data::getName() const
   return _name;
 }
 
+const std::vector<std::string> &parser::Data::getInformation() const
+{
+  return _information;
+}
+
 
