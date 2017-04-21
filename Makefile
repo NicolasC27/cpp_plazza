@@ -5,7 +5,7 @@
 ## Login   <nicolas1.chevalier@epitech.eu>
 ## 
 ## Started on  Thu Apr 13 17:32:21 2017 Valentin Gérard
-## Last update Wed Apr 19 17:28:03 2017 Valentin Gérard
+## Last update Fri Apr 21 12:14:20 2017 Valentin Gérard
 ##
 
 DEBUG		= no
@@ -28,10 +28,13 @@ CXXFLAGS	= -I./$(INCDIR)
 CXXFLAGS	+= -W -Wall -Wextra
 CXXFLAGS	+= -std=c++11
 
+LDFLAGS		= -pthread
+
 SRCS		= $(SRCSDIR)/main.cpp \
 		  $(SRCSDIR)/IOfd.cpp \
 		  $(SRCSDIR)/Exception.cpp \
 		  $(SRCSDIR)/NamedPipe.cpp \
+		  $(SRCSDIR)/ThreadPool.cpp \
 		  $(SRCSDIR)/Fork.cpp \
 		  $(SRCSDIR)/Data.cpp \
 		  $(SRCSDIR)/PlazzaCore.cpp
@@ -39,7 +42,7 @@ SRCS		= $(SRCSDIR)/main.cpp \
 OBJS		= $(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/%.o,$(SRCS))
 
 $(NAME):	build-objsdir $(OBJS)
-		$(CXX) $(OBJS) -o $(NAME)
+		$(CXX) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.cpp
 		$(CXX) $(CXXFLAGS) -c $< -o $@

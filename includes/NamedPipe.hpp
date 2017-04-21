@@ -37,6 +37,7 @@ namespace Plazza
 
     void writer(const std::string &data);
     std::string	reader();
+
   };
 
 }
