@@ -37,7 +37,14 @@ void					Plazza::PlazzaCore::run()
 
   while (std::getline(std::cin, command))
 	{
-	  parse.ManageCommand(command);
+	  try
+		{
+		  parse.ManageCommand(command);
+		} catch (std::exception &e)
+		{
+			std::cout << "Caught Exception : " << e.what() << std::endl;
+		}
+
 //	  while ((parse.getCommand()))
 //		{
 //

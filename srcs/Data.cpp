@@ -14,6 +14,10 @@ parser::Data::Data(std::string data, std::list<std::string> information) : _name
 {
   std::list<std::string>::const_iterator list = information.begin();
 
+  if (data.empty())
+	throw std::runtime_error("Name file empty");
+  if (information.empty())
+	throw std::runtime_error("There is no informations for the file '" + data + "'");
   while (list != information.end())
 	{
 	  addData((*list));
