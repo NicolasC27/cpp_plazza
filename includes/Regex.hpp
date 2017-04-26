@@ -5,7 +5,7 @@
 // Login   <lucas.deboute@epitech.eu>
 // 
 // Started on  Thu Apr 13 19:34:42 2017 Lucas Debouté
-// Last update Sat Apr 15 12:51:41 2017 Valentin Gérard
+// Last update Thu Apr 27 00:14:38 2017 Valentin Gérard
 //
 
 #ifndef REGEX_HPP_
@@ -16,13 +16,19 @@
 # include <regex>
 # include <iostream>
 
-class Regex
+namespace Plazza
 {
-public:
-  Regex(){}
-  ~Regex(){}
-  std::vector<std::string> ipTracker(const std::string &toFind);
-  std::vector<std::string> emailTracker(const std::string &toFind);
-};
+
+  class Regex
+  {
+  public:
+    Regex(){}
+    ~Regex(){}
+    std::vector<std::string> ipTracker(const std::string &toFind);
+    std::vector<std::string> phoneTracker(const std::string &toFind);
+    std::vector<std::string> emailTracker(const std::string &toFind);
+  };
+  
+}
 
 #endif /* !REGEX_HPP_ */

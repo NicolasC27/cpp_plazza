@@ -5,7 +5,7 @@
 ## Login   <nicolas1.chevalier@epitech.eu>
 ## 
 ## Started on  Thu Apr 13 17:32:21 2017 Valentin Gérard
-## Last update Sun Apr 23 10:52:59 2017 Valentin Gérard
+## Last update Thu Apr 27 00:14:57 2017 Valentin Gérard
 ##
 
 DEBUG		= no
@@ -37,6 +37,7 @@ SRCS		= $(SRCSDIR)/main.cpp \
 		  $(SRCSDIR)/ThreadPool.cpp \
 		  $(SRCSDIR)/SemaphoreRessources.cpp \
 		  $(SRCSDIR)/Semaphore.cpp \
+		  $(SRCSDIR)/Regex.cpp \
 		  $(SRCSDIR)/Fork.cpp \
 		  $(SRCSDIR)/Data.cpp \
 		  $(SRCSDIR)/PlazzaCore.cpp \
