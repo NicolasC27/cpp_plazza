@@ -1,12 +1,12 @@
-/*
-** main.cpp for cpp_plazza in /home/cheval_8/rendu/cpp_plazza/main.cpp
-**
-** Made by Nicolas Chevalier
-** Login   <nicolas1.chevalier@epitech.eu>
-**
-** Started on  jeu. avr. 13 17:30:12 2017 Nicolas Chevalier
-** Last update jeu. avr. 13 17:30:12 2017 Nicolas Chevalier
-*/
+//
+// main.cpp for cpp_plazza in /home/ikirame/CLionProjects/cpp_plazza/srcs
+// 
+// Made by Valentin Gérard
+// Login   <valentin.gerard@epitech.eu>
+// 
+// Started on  Tue Apr 25 23:52:37 2017 Valentin Gérard
+// Last update Tue Apr 25 23:52:40 2017 Valentin Gérard
+//
 
 #include <cstring>
 #include <memory>
@@ -14,9 +14,9 @@
 
 void	usage()
 {
-  std::cout << "---------------" << std::endl;
+  std::cout << "+-------------+" << std::endl;
   std::cout << "| PLAZZA HELP |" << std::endl;
-  std::cout << "---------------\n" << std::endl;
+  std::cout << "+-------------+\n" << std::endl;
   std::cout << "USAGE" << std::endl;
   std::cout << "\t./plazza [nbThreads] -> Number of threads in a ThreadPool.\n" << std::endl;
   std::cout << "EXAMPLE" << std::endl;
@@ -24,7 +24,7 @@ void	usage()
   std::cout << "\t./plazza 5 : OK" << std::endl;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
   int	nbThreads;
 

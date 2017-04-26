@@ -33,7 +33,6 @@ namespace Plazza
     ~NamedPipe();
 
     const std::string &getFileName() const;
-    void setFileName(const std::string &fileName);
 
     void writer(const std::string &data);
     std::string	reader();

@@ -48,6 +48,7 @@ namespace Plazza
     std::condition_variable _workerAvailable;
     std::condition_variable _doWork;
     std::mutex _doWorkMutex;
+    std::mutex _workerAvailableMutex;
 
    public:
     ThreadPool(int poolSize);
@@ -55,9 +56,16 @@ namespace Plazza
     ThreadPool &operator=(const ThreadPool &other) = delete;
     ~ThreadPool();
 
+    int getPendingCommandsSize() const;
+    void setRunning(bool state);
+
     bool isRunning() const;
     std::string	fetchNextCommand();
     void workerAvailableNotify();
+    void pushNewCommand(const std::string &command);
+    void notifyWorker();
+    void notifyAllWorker();
+    void waitWorkerAvailable();
   };
 
 }

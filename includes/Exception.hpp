@@ -59,6 +59,13 @@ namespace Plazza
     virtual ~NamedPipeException() throw();
   };
 
+  class SemaphoreException : public PlazzaException
+  {
+   public:
+    SemaphoreException(const std::string &message) throw();
+    virtual ~SemaphoreException() throw();
+  };
+
 }
 
 #endif /* !EXCEPTION_HPP_ */

@@ -5,7 +5,7 @@
 ## Login   <nicolas1.chevalier@epitech.eu>
 ## 
 ## Started on  Thu Apr 13 17:32:21 2017 Valentin Gérard
-## Last update Fri Apr 21 12:14:20 2017 Valentin Gérard
+## Last update Sun Apr 23 10:52:59 2017 Valentin Gérard
 ##
 
 DEBUG		= no
@@ -35,10 +35,13 @@ SRCS		= $(SRCSDIR)/main.cpp \
 		  $(SRCSDIR)/Exception.cpp \
 		  $(SRCSDIR)/NamedPipe.cpp \
 		  $(SRCSDIR)/ThreadPool.cpp \
+		  $(SRCSDIR)/SemaphoreRessources.cpp \
+		  $(SRCSDIR)/Semaphore.cpp \
 		  $(SRCSDIR)/Fork.cpp \
 		  $(SRCSDIR)/Data.cpp \
 		  $(SRCSDIR)/PlazzaCore.cpp \
 		  $(SRCSDIR)/Parser.cpp \
+		  $(SRCSDIR)/PlazzaProcess.cpp
 
 OBJS		= $(patsubst $(SRCSDIR)/%.cpp,$(OBJSDIR)/%.o,$(SRCS))
 

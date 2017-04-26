@@ -10,6 +10,7 @@
 
 # include <fcntl.h>
 # include <unistd.h>
+#include <iostream>
 #include "IOfd.hpp"
 
 Common::IOfd::IOfd(const std::string &fileName, int flags)
@@ -24,14 +25,20 @@ Common::IOfd::~IOfd()
   close(this->_fd);
 }
 
+int Common::IOfd::getFd() const
+{
+  return this->_fd;
+}
+
 void	Common::IOfd::write(const std::string &data)
 {
   int	count = 0;
   int	writeCount;
 
+  writeSize((int32_t) data.size());
   do
     {
-      writeCount = ::write(this->_fd, data.c_str() + count, data.size() - count);
+      writeCount = (int) ::write(this->_fd, data.c_str() + count, data.size() - count);
       if (writeCount == -1)
 	throw (IOfdException(strerror(errno)));
       count += writeCount;
@@ -45,16 +52,33 @@ std::string	Common::IOfd::read()
   int		readCount;
   int 		count = 0;
 
-  if (::read(this->_fd, &length, sizeof(length)) <= 0)
-    throw IOfdException(strerror(errno));
-  data.resize(length);
+  length = readSize();
+  data.resize((unsigned long) length);
   do
     {
-      readCount = ::read(this->_fd, &data[count], data.size() - count);
+      readCount = (int) ::read(this->_fd, &data[count], data.size() - count);
       if (readCount == -1)
 	throw IOfdException(strerror(errno));
       count += readCount;
     }
   while (readCount > 0);
   return (data);
+}
+
+void Common::IOfd::writeSize(std::int32_t size)
+{
+  int writeCount;
+
+  writeCount = (int) ::write(this->_fd, &size, sizeof(size));
+  if (writeCount == -1)
+    throw IOfdException(strerror(errno));
+}
+
+std::int32_t Common::IOfd::readSize()
+{
+  std::int32_t size;
+
+  if (::read(this->_fd, &size, sizeof(size)) <= 0)
+    throw IOfdException(strerror(errno));
+  return size;
 }

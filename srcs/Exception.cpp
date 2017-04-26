@@ -38,3 +38,9 @@ Plazza::NamedPipeException::NamedPipeException(const std::string &message) throw
 
 Plazza::NamedPipeException::~NamedPipeException() throw()
 {}
+
+Plazza::SemaphoreException::SemaphoreException(const std::string &message) throw() : PlazzaException(message)
+{}
+
+Plazza::SemaphoreException::~SemaphoreException() throw()
+{}

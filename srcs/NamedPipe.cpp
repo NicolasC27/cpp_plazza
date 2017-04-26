@@ -11,7 +11,7 @@
 #include <fcntl.h>
 #include "NamedPipe.hpp"
 
-Plazza::NamedPipe::NamedPipe(const std::string &fileName) : _fileName(fileName + ".fifo")
+Plazza::NamedPipe::NamedPipe(const std::string &fileName) : _fileName(fileName)
 {
   if (mkfifo(this->_fileName.c_str(), S_IRWXU | S_IRGRP | S_IWGRP) == -1)
     throw NamedPipeException(strerror(errno));
@@ -35,5 +35,5 @@ void		Plazza::NamedPipe::writer(const std::string &data)
 
 std::string	Plazza::NamedPipe::reader()
 {
-  return (this->_fileIO->read());
+  return this->_fileIO->read();
 }

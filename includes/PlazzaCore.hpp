@@ -5,14 +5,18 @@
 // Login   <valentin.gerard@epitech.eu>
 // 
 // Started on  Mon Apr 17 13:37:20 2017 Valentin Gérard
-// Last update Mon Apr 17 13:37:52 2017 Valentin Gérard
+// Last update Sun Apr 23 10:53:53 2017 Valentin Gérard
 //
 
 #ifndef PLAZZACORE_HPP_
 # define PLAZZACORE_HPP_
 
+# include <vector>
 # include <iostream>
 
+# include "PlazzaProcess.hpp"
+# include "Parser.hpp"
+# include "NamedPipe.hpp"
 
 namespace Plazza
 {
@@ -21,11 +25,17 @@ namespace Plazza
   {
    private:
     int _nbThreads;
+    int _nbCommands;
+    std::vector<Plazza::PlazzaProcess *> _slaves;
+
+    unsigned int nbProcessNeeded(int nbCurrentCommands);
+    void createNewProcess();
+    void writeCommands(const std::vector<parser::Data *> files, Plazza::NamedPipe &commandPipe);
 
    public:
     PlazzaCore(int nbThreads);
-    PlazzaCore(const PlazzaCore &other);
-    PlazzaCore &operator=(const PlazzaCore &other);
+    PlazzaCore(const PlazzaCore &other) = delete;
+    PlazzaCore &operator=(const PlazzaCore &other) = delete;
     ~PlazzaCore();
 
     void run();

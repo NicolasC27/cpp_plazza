@@ -20,12 +20,17 @@ namespace Common
   {
   private:
     int _fd;
-    
+
+    void writeSize(std::int32_t size);
+    std::int32_t readSize();
+
   public:
     IOfd(const std::string &fileName, int flags);
     IOfd(const IOfd &other) = delete;
     IOfd &operator=(const IOfd &other) = delete;
     ~IOfd();
+
+    int getFd() const;
 
     void write(const std::string &data);
     std::string read();
