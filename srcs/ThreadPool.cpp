@@ -10,7 +10,11 @@
 
 #include <iostream>
 #include <cstring>
-#include "../includes/ThreadPool.hpp"
+#include <fcntl.h>
+#include <unistd.h>
+#include "Regex.hpp"
+#include "ThreadPool.hpp"
+#include "IOfd.hpp"
 
 Plazza::Worker::Worker(ThreadPool &pool) : _pool(pool), _workerThread(std::thread(&Plazza::Worker::run, this)), _idle(false)
 {}
@@ -40,6 +44,41 @@ void Plazza::Worker::run()
 
 void Plazza::Worker::processCommand(const std::string &command)
 {
+  int fd;
+  int pos;
+  int		readCount;
+  Plazza::Regex regex;
+  std::string	fileName;
+  std::string	file;
+  std::vector<std::string> results;
+  char buffer[1024];
+
+  pos = (int) command.find('-');
+  for (int i = 0; i < pos ; i++)
+    fileName += command[i];
+  fd = open(fileName.c_str(), O_RDONLY);
+  std::string	data;
+
+  data.resize(1024);
+  do
+    {
+      readCount = (int) read(fd, &buffer, 1024);
+      if (readCount == -1)
+	exit (1);
+      for (int i = 0; i < readCount; i++)
+	{
+	  data += buffer[i];
+	}
+    }
+  while (readCount > 0);
+  if (strcmp(command.c_str() + pos + 1, "IP_ADDRESS") == 0)
+    results = regex.ipTracker(data);
+  else if (strcmp(command.c_str() + pos + 1, "EMAIL_ADDRESS") == 0)
+      results = regex.emailTracker(data);
+  else if (strcmp(command.c_str() + pos + 1, "PHONE_NUMBER") == 0)
+	results = regex.phoneTracker(data);
+  for (std::vector<std::string>::const_iterator result = results.begin(); result < results.end() ; result++)
+    std::cout << *result << std::endl;
 }
 
 Plazza::ThreadPool::ThreadPool(int poolSize) : _poolSize(poolSize), _running(true)

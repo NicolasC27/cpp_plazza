@@ -25,27 +25,28 @@ void					Plazza::PlazzaCore::run()
   std::string				currentFeedBack;
   NamedPipe				commandPipe(PIPECOMMAND);
   NamedPipe				feedBackPipe(PIPEFEEDBACK);
-  parser::Parser			parser;
+  parser::Parser			*parser;
 
   while (std::getline(std::cin, currentCommand))
     {
       try
 	{
-	  parser.ManageCommand(currentCommand);
-
-	  this->_nbCommands += parser.getFiles().size();
+	  parser = new parser::Parser;
+	  parser->ManageCommand(currentCommand);
+	  this->_nbCommands += parser->getFiles().size();
 	  if (this->_slaves.size() < nbProcessNeeded(this->_nbCommands))
 	    createNewProcess();
-	  writeCommands(parser.getFiles(), commandPipe);
-	  currentFeedBack = feedBackPipe.reader();
+	  writeCommands(parser->getFiles(), commandPipe);
+	  //currentFeedBack = feedBackPipe.reader();
 	  this->_nbCommands -= currentFeedBack.size();
+	  delete(parser);
 	}
       catch (std::exception &exception)
 	{
 	  std::cerr << exception.what() << std::endl;
 	}
-      std::cout << "nb command : " << this->_nbCommands << std::endl;
     }
+  slaves.clear();
 }
 
 unsigned int	Plazza::PlazzaCore::nbProcessNeeded(int nbCurrentCommands)

@@ -35,7 +35,6 @@ std::vector<std::string>	Plazza::Regex::phoneTracker(const std::string &toFind)
        it != std::sregex_iterator(); it++)
     {
       std::smatch m = *it;
-      std::cout << m[0] << std::endl;
       tmp.push_back(m[0]);
     }
   return tmp;
@@ -51,7 +50,6 @@ std::vector<std::string>	Plazza::Regex::emailTracker(const std::string &toFind)
        it != std::sregex_iterator(); it++)
     {
       std::smatch m = *it;
-      std::cout << m[0] << std::endl;
       tmp.push_back(m[0]);
     }
   return tmp;
