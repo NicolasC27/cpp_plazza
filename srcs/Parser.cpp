@@ -24,27 +24,34 @@ void parser::Parser::createNewData(std::string data)
 {
   Data *newData;
   std::string save;
-  std::list<std::string> list;
-  std::list<std::string> information;
+  std::vector<std::string> list;
+  std::vector<std::string> information;
   size_t pos = 0;
 
-  setEraseVector(&_files);
   while ((pos = data.find(' ')) != std::string::npos || (pos = data.find('\t')) != std::string::npos || !data.empty())
 	{
 	  if (pos == std::string::npos)
 		pos = data.size();
 	  save = data.substr(0, pos);
-	  if (!save.empty())
+	  if (!(save.empty()))
 		{
 		  if (save == std::string("PHONE_NUMBER") || save == std::string("EMAIL_ADDRESS") ||
 			  save == std::string("IP_ADDRESS"))
-			information.push_front(save);
+			{
+			  if (list.size() < 1)
+				throw std::runtime_error("Did you forget the file name?");
+			  information.push_back(save);
+			}
 		  else
-			list.push_front(save);
-		  data.erase(0, pos + 1);
+			{
+			  if (information.size() > 0)
+				throw std::runtime_error("Did you forget a semicolon?");
+			  list.push_back(save);
+			}
 		}
+	  data.erase(0, pos + 1);
 	}
-  for (std::list<std::string>::iterator lists = list.begin(); lists != list.end(); ++lists)
+  for (std::vector<std::string>::iterator lists = list.begin(); lists != list.end(); ++lists)
 	{
 	  newData = new Data((*lists), information);
 	  _files.push_back(newData);
@@ -58,15 +65,13 @@ void parser::Parser::ManageCommand(std::string basic_string)
 
   if (basic_string.empty())
 	throw std::runtime_error("Command empty !");
+  setEraseVector(&_files);
   while ((pos = basic_string.find(';')) != std::string::npos || !basic_string.empty())
 	{
 	  if (pos == std::string::npos)
 		pos = basic_string.size();
 	  save = basic_string.substr(0, pos);
 	  createNewData(save);
-	  std::size_t found = basic_string.find(";");
-	  if (!(found != std::string::npos))
-		throw std::runtime_error("Did you forget something ? Maybe ';'");
 	  basic_string.erase(0, pos + 1);
 	}
   if (_files.empty())

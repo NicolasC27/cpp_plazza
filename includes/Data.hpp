@@ -20,7 +20,7 @@ namespace parser
 	class Data
 	{
 		public:
-		Data(std::string data, std::list<std::string> information);
+		Data(std::string data, std::vector<std::string> information);
 
 		virtual ~Data();
 

@@ -61,6 +61,8 @@ void	Plazza::PlazzaCore::createNewProcess()
 
 void	Plazza::PlazzaCore::writeCommands(const std::vector<parser::Data *> files, Plazza::NamedPipe &commandPipe)
 {
-  for (std::vector<parser::Data *>::const_iterator file = files.begin(); file < files.end(); file++)
-    commandPipe.writer((*file)->getName() + "-" + (*file)->getInformation()[0]);
+  for (std::vector<parser::Data *>::const_iterator file = files.begin(); file != files.end(); file++)
+	{
+    	commandPipe.writer((*file)->getName() + "-" + (*file)->getInformation()[0]);
+	}
 }

@@ -10,9 +10,9 @@
 
 #include <Data.hpp>
 
-parser::Data::Data(std::string data, std::list<std::string> information) : _name(data)
+parser::Data::Data(std::string data, std::vector<std::string> information) : _name(data)
 {
-  std::list<std::string>::const_iterator list = information.begin();
+  std::vector<std::string>::const_iterator list = information.begin();
 
   if (data.empty())
 	throw std::runtime_error("Name file empty");
