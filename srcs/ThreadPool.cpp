@@ -71,6 +71,7 @@ void Plazza::Worker::processCommand(const std::string &command)
 	}
     }
   while (readCount > 0);
+  close(fd);
   if (strcmp(command.c_str() + pos + 1, "IP_ADDRESS") == 0)
     results = regex.ipTracker(data);
   else if (strcmp(command.c_str() + pos + 1, "EMAIL_ADDRESS") == 0)

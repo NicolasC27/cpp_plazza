@@ -30,6 +30,7 @@ namespace Plazza
    private:
     Fork _fork;
     Semaphore _semaphore;
+    bool	_alive;
 
     fd_set getFdSet(int fd);
     void setTimeOut(struct timeval &timeOut, __time_t seconds, __useconds_t useconds);
@@ -39,6 +40,7 @@ namespace Plazza
     ~PlazzaProcess();
 
     void run(int poolSize);
+    bool getStatus() const;
   };
 
 }

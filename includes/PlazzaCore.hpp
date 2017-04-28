@@ -28,9 +28,10 @@ namespace Plazza
     int _nbCommands;
     std::vector<Plazza::PlazzaProcess *> _slaves;
 
-    unsigned int nbProcessNeeded(int nbCurrentCommands);
+    unsigned int nbProcessNeeded(int nbCurrentCommands, std::vector<Plazza::PlazzaProcess *>slaves);
     void createNewProcess();
     void writeCommands(const std::vector<parser::Data *> files, Plazza::NamedPipe &commandPipe);
+    void deleteProcess();
 
    public:
     PlazzaCore(int nbThreads);

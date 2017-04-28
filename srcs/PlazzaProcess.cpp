@@ -12,7 +12,7 @@
 #include "ThreadPool.hpp"
 #include "PlazzaProcess.hpp"
 
-Plazza::PlazzaProcess::PlazzaProcess(int poolSize)
+Plazza::PlazzaProcess::PlazzaProcess(int poolSize) : _alive(true)
 {
   if (this->_fork.isChild())
     {
@@ -27,10 +27,17 @@ Plazza::PlazzaProcess::PlazzaProcess(int poolSize)
 	  exit(1);
 	}
     }
+  else if (this->_fork.isParent())
+      this->_alive = false;
 }
 
 Plazza::PlazzaProcess::~PlazzaProcess()
 {}
+
+bool Plazza::PlazzaProcess::getStatus() const
+{
+  return this->_alive;
+}
 
 void			Plazza::PlazzaProcess::run(int poolSize)
 {
@@ -44,15 +51,11 @@ void			Plazza::PlazzaProcess::run(int poolSize)
   while (threadPool.isRunning())
     {
       setTimeOut(timeOut, 5, 0);
-      if (select(iOfd.getFd() + 1, &fdSet, 0, 0, &timeOut) <= 0)
+      if (select(iOfd.getFd() + 1, &fdSet, NULL, NULL, &timeOut) != -1)
 	{
-	  threadPool.setRunning(false);
-	  threadPool.notifyAllWorker();
-	}
-      else
-	{
-	  if (this->_semaphore.try_lock())
+	  if (FD_ISSET(iOfd.getFd(), &fdSet))
 	    {
+	      std::lock_guard<Semaphore> guard{this->_semaphore};
 	      try
 		{
 		  currentCommand = iOfd.read();
@@ -66,11 +69,38 @@ void			Plazza::PlazzaProcess::run(int poolSize)
 		{
 		  std::cerr << exception.what() << std::endl;
 		}
-	      this->_semaphore.unlock();
+	    }
+	  else
+	    {
+	      threadPool.setRunning(false);
+	      threadPool.notifyAllWorker();
 	    }
 	}
       if (threadPool.getPendingCommandsSize() > poolSize * JOBSPENDING)
 	threadPool.waitWorkerAvailable();
+      /*if (select(iOfd.getFd() + 1, &fdSet, 0, 0, &timeOut) <= 0)
+	{
+	  threadPool.setRunning(false);
+	  threadPool.notifyAllWorker();
+	}
+      else
+	{
+	  std::lock_guard<Semaphore> guard{this->_semaphore};
+	  try
+	    {
+	      currentCommand = iOfd.read();
+	      if (currentCommand.empty())
+		throw Common::IOfdException(strerror(errno));
+	      threadPool.pushNewCommand(currentCommand);
+	      threadPool.notifyWorker();
+	      std::cout << "aie" << std::endl;
+	      iOfdFeed.write("D");
+	    }
+	  catch (std::exception &exception)
+	    {
+	      std::cerr << exception.what() << std::endl;
+	    }
+	}*/
     }
 }
 
