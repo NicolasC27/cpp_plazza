@@ -113,7 +113,6 @@ void Plazza::PlazzaCore::deleteProcess()
   std::vector<Plazza::PlazzaProcess *>::iterator iterator = this->_slaves.begin();
   for (unsigned long i = 0; i < this->_slaves.size(); i++)
     {
-      std::cout << this->_slaves[i]->getStatus() << std::endl;
       if (!this->_slaves[i]->getStatus())
 	{
 	  delete(*iterator);
