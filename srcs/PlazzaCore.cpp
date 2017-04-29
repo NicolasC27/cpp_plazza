@@ -5,7 +5,7 @@
 // Login   <valentin.gerard@epitech.eu>
 //
 // Started on  Mon Apr 17 13:38:07 2017 Valentin Gérard
-// Last update Thu Apr 27 23:19:09 2017 Valentin Gérard
+// Last update Sat Apr 29 14:24:07 2017 Valentin Gérard
 //
 
 #include "SemaphoreRessources.hpp"
@@ -54,7 +54,6 @@ void					Plazza::PlazzaCore::run()
 		    {
 		      parser.ManageCommand(currentCommand);
 		      this->_nbCommands += parser.getFiles().size();
-		      deleteProcess();
 		      if (this->_slaves.size() < nbProcessNeeded(this->_nbCommands, this->_slaves))
 			for (unsigned int i = 0; i < this->_slaves.size() - nbProcessNeeded(this->_nbCommands, this->_slaves); ++i)
 			  createNewProcess();
@@ -71,20 +70,18 @@ void					Plazza::PlazzaCore::run()
 	  if (FD_ISSET(feedBackIofd.getFd(), &readSet))
 	    {
 	      currentFeedBack = feedBackPipe.reader();
-	      std::cout << currentFeedBack << std::endl;
 	      this->_nbCommands -= currentFeedBack.size();
 	      deleteProcess();
 	    }
 	}
     }
+  sleep(5);
   slaves.clear();
 }
 
 unsigned int	Plazza::PlazzaCore::nbProcessNeeded(int nbCurrentCommands, std::vector<Plazza::PlazzaProcess *>slaves)
 {
-  if (slaves.size() == 0)
-    return (1);
-  if (nbCurrentCommands > this->_nbThreads * JOBSPENDING)
+  if (slaves.size() == 0 || nbCurrentCommands > this->_nbThreads * JOBSPENDING)
     return (unsigned int) ((nbCurrentCommands / (this->_nbThreads * JOBSPENDING)) + 1);
   else
     return (unsigned int) ((nbCurrentCommands / (this->_nbThreads * JOBSPENDING)));
@@ -92,13 +89,16 @@ unsigned int	Plazza::PlazzaCore::nbProcessNeeded(int nbCurrentCommands, std::vec
 
 void	Plazza::PlazzaCore::createNewProcess()
 {
+  Plazza::PlazzaProcess *newProcess;
+
   try
     {
-    	  this->_slaves.push_back(new Plazza::PlazzaProcess(this->_nbThreads));
+      newProcess = new Plazza::PlazzaProcess(this->_nbThreads);
+      this->_slaves.push_back(newProcess);
     }
   catch (std::exception &exception)
     {
-      // delete
+      delete(newProcess);
     }
 }
 

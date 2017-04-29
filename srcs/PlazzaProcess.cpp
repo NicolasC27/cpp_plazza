@@ -78,29 +78,6 @@ void			Plazza::PlazzaProcess::run(int poolSize)
 	}
       if (threadPool.getPendingCommandsSize() > poolSize * JOBSPENDING)
 	threadPool.waitWorkerAvailable();
-      /*if (select(iOfd.getFd() + 1, &fdSet, 0, 0, &timeOut) <= 0)
-	{
-	  threadPool.setRunning(false);
-	  threadPool.notifyAllWorker();
-	}
-      else
-	{
-	  std::lock_guard<Semaphore> guard{this->_semaphore};
-	  try
-	    {
-	      currentCommand = iOfd.read();
-	      if (currentCommand.empty())
-		throw Common::IOfdException(strerror(errno));
-	      threadPool.pushNewCommand(currentCommand);
-	      threadPool.notifyWorker();
-	      std::cout << "aie" << std::endl;
-	      iOfdFeed.write("D");
-	    }
-	  catch (std::exception &exception)
-	    {
-	      std::cerr << exception.what() << std::endl;
-	    }
-	}*/
     }
 }
 
