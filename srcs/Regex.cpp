@@ -5,7 +5,7 @@
 // Login   <lucas.deboute@epitech.eu>
 // 
 // Started on  Thu Apr 13 19:37:37 2017 Lucas Debouté
-// Last update Thu Apr 27 00:14:09 2017 Valentin Gérard
+// Last update Sat Apr 29 22:26:18 2017 Lucas Debouté
 //
 
 #include "Regex.hpp"
@@ -43,7 +43,7 @@ std::vector<std::string>	Plazza::Regex::phoneTracker(const std::string &toFind)
 std::vector<std::string>	Plazza::Regex::emailTracker(const std::string &toFind)
 {
   std::smatch matches;
-  std::regex mail_combinaison("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+  std::regex mail_combinaison("((\\w|\\.|-)+@(\\w|\\.|-)+)");
   std::vector<std::string>	tmp;
 
   for (std::sregex_iterator it = std::sregex_iterator(toFind.begin(), toFind.end(), mail_combinaison);
