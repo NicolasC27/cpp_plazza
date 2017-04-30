@@ -59,7 +59,6 @@ void Plazza::Worker::processCommand(const std::string &command)
     fileName += command[i];
   fd = open(fileName.c_str(), O_RDONLY);
 
-  data.resize(1024);
   do
     {
       readCount = (int) read(fd, &buffer, 1024);
@@ -78,6 +77,12 @@ void Plazza::Worker::processCommand(const std::string &command)
       results = regex.emailTracker(data);
   else if (strcmp(command.c_str() + pos + 1, "PHONE_NUMBER") == 0)
 	results = regex.phoneTracker(data);
+  if (results.size() == 0)
+    {
+      results = Plazza::Decryption::ceasarDecryption(data, command.c_str() + pos + 1);
+      if (results.size() == 0)
+	results = Plazza::Decryption::xorDecryption(data, command.c_str() + pos + 1);
+    }
   for (std::vector<std::string>::const_iterator result = results.begin(); result < results.end() ; result++)
     std::cout << *result << std::endl;
 }
