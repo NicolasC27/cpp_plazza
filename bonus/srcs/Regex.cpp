@@ -43,7 +43,7 @@ std::vector<std::string>	Plazza::Regex::phoneTracker(const std::string &toFind)
 std::vector<std::string>	Plazza::Regex::emailTracker(const std::string &toFind)
 {
   std::smatch matches;
-  std::regex mail_combinaison("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+  std::regex mail_combinaison("(\\\\w+)(\\\\.|_)?(\\\\w*)@(\\\\w+)(\\\\.(\\\\w+))+");
   std::vector<std::string>	tmp;
 
   for (std::sregex_iterator it = std::sregex_iterator(toFind.begin(), toFind.end(), mail_combinaison);
